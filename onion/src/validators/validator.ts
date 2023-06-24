@@ -16,3 +16,11 @@ export function validate(schema: any) {
     }
   };
 }
+
+export const itemDataSchema = z.object({
+  nome: z.string(),
+  rfid: z.string(),
+  descricao: z.string().optional(),
+  estoque: z.number().optional(),
+  imagem: z.string().optional(),
+});

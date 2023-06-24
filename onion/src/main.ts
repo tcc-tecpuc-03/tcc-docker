@@ -29,12 +29,9 @@ app.use(cors({
 }))
 app.use(logger);
 
-import {itemRouter} from "./routers/item";
-import {basketRouter} from "./routers/basket";
-
-app.use("/basket", basketRouter);
-app.use("/items", itemRouter);
-
+app.get("/", (req, res) => {
+  res.send("Buysket API");
+});
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port} 🚀`);
