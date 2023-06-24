@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from 'cors'
-
+import router from "./routers/main";
 const app = express();
 app.use(bodyParser.json());
 
@@ -27,11 +27,14 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200
 }))
+
 app.use(logger);
 
 app.get("/", (req, res) => {
   res.send("Buysket API");
 });
+
+app.use('/api/v1/', router)
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port} 🚀`);

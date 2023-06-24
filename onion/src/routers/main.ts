@@ -1,3 +1,6 @@
-import { Router} from "express";
+import { Router } from "express";
+import itemRouter from './items';
 
-export const router = Router()
+const router = Router().use('/items', itemRouter);
+
+export default router;
