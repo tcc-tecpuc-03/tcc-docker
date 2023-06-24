@@ -1,6 +1,9 @@
 import { Router } from "express";
-import { get } from "../controller/item";
+import { get, post } from "../controller/item";
+import { itemDataSchema, validate } from "../validators/validator";
 
-const router = Router().get("/", get);
+const router = Router()
+.get("/", get)
+.use('/', validate(itemDataSchema), post);
 
 export default router;

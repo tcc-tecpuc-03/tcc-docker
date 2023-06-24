@@ -23,11 +23,11 @@ model basket_items {
 }
 
 model items {
-  id           Int            @id
+  id           Int            @id @default(autoincrement())
   rfid         String         @db.VarChar
-  nome         String         @db.VarChar
-  descricao    String?        @db.VarChar
-  estoque      Decimal?       @db.Decimal
+  nome         String?        @db.VarChar
+  categoria    Int
   imagem       String?        @db.VarChar
+  preco        Decimal        @default(0) @db.Decimal
   basket_items basket_items[]
 }
