@@ -11,6 +11,7 @@ model basket {
   id           Int            @id @default(autoincrement())
   nome         String?        @db.VarChar
   created_at   DateTime?      @default(now()) @db.Timestamp(6)
+  deleted      Boolean        @default(false)
   basket_items basket_items[]
 }
 
@@ -29,5 +30,6 @@ model items {
   categoria    Int
   imagem       String?        @db.VarChar
   preco        Decimal        @default(0) @db.Decimal
+  deleted      Boolean        @default(false)
   basket_items basket_items[]
 }
