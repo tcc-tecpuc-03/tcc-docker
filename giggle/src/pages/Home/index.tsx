@@ -2,14 +2,20 @@ import { Sidebar } from "../../components/Layout/Sidebar";
 import Chart from "react-apexcharts";
 import Card from "./components/Card";
 import "apexcharts/dist/apexcharts.css";
-import {FiShoppingBag} from 'react-icons/fi'
+import { FiShoppingBag } from "react-icons/fi";
 export default function Home() {
   const chartOptions = {
     chart: {
       id: "bar-chart",
     },
     xaxis: {
-      categories: ["Categoria 1", "Categoria 2", "Categoria 3", "Categoria 4", "Categoria 5"],
+      categories: [
+        "Categoria 1",
+        "Categoria 2",
+        "Categoria 3",
+        "Categoria 4",
+        "Categoria 5",
+      ],
     },
   };
 
@@ -25,18 +31,15 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex ">
       <Sidebar />
       <div className="flex flex-col w-full">
         <div className="grid grid-cols-3 gap-4 p-4">
           <Card title="Card 1" />
           <Card title="Card 2" />
-          <Card title="Cestas finalizadas" 
-          icon={FiShoppingBag}
-          >
+          <Card title="Cestas finalizadas" icon={FiShoppingBag}>
             <p className="text-3xl font-inter">10</p>
-
-            </Card>
+          </Card>
         </div>
         <div className="p-4">
           <Chart
