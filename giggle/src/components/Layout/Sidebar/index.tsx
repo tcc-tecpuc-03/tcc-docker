@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiMenu, FiUser, FiHome, FiPlus } from "react-icons/fi";
 import { createElement, useState } from "react";
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 
 export function Sidebar() {
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ export function Sidebar() {
       name: "Criar novo item",
       icon: FiPlus,
       path: "/createitem",
-    }
+    },
   ];
 
   if (isMobile) {
@@ -44,7 +44,11 @@ export function Sidebar() {
   }
 
   return (
-    <div className={`flex flex-col h-screen font-titillium bg-gray-800 text-white ${open ? "w-[78px]" : "w-[250px]"}`}>
+    <div
+      className={`flex flex-col h-screen font-titillium bg-gray-800 text-white ${
+        open ? "w-[78px]" : "w-[250px]"
+      }`}
+    >
       <div className={`flex items-center justify-center gap-2 h-16`}>
         {!open && <span className="text-lg">BUYSKET</span>}
         <button
