@@ -1,7 +1,7 @@
-import { PrismaClient, items } from "@prisma/client";
-import { IItem } from "./types.t";
-import { itemDataSchema } from "../validators/validator";
-import { Request, Response } from "express";
+import { PrismaClient, items } from '@prisma/client';
+import { IItem } from './types.t';
+import { itemDataSchema } from '../validators/validator';
+import { Request, Response } from 'express';
 const prisma = new PrismaClient();
 
 export const get = async (req: Request, res: Response) => {
@@ -13,7 +13,21 @@ export const get = async (req: Request, res: Response) => {
     });
     res.status(200).send(items);
   } catch (err) {
-    res.status(500).send({ message: err.message || "Erro ao buscar itens" });
+    res.status(500).send({ message: err.message || 'Erro ao buscar itens' });
+  }
+};
+
+export const getByRFID = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const items = await prisma.items.findMany({
+      where: {
+        rfid: id,
+      },
+    });
+    res.status(200).send(items);
+  } catch (err) {
+    res.status(500).send({ message: err.message || 'Erro ao buscar itens' });
   }
 };
 
@@ -30,11 +44,11 @@ export const post = async (req: Request, res: Response) => {
       },
     });
     res.status(200).send({
-      message: "Item criado com sucesso",
+      message: 'Item criado com sucesso',
       item,
     });
   } catch (err) {
-    res.status(500).send({ message: err.message || "Erro ao criar item" });
+    res.status(500).send({ message: err.message || 'Erro ao criar item' });
   }
 };
 
@@ -55,13 +69,13 @@ export const patch = async (req: Request, res: Response) => {
       },
     });
     res.status(200).send({
-      message: "Item atualizado com sucesso",
+      message: 'Item atualizado com sucesso',
       item,
     });
   } catch (err) {
-    res.status(500).send({ message: err.message || "Erro ao atualizar item" });
+    res.status(500).send({ message: err.message || 'Erro ao atualizar item' });
   }
-}
+};
 
 export const remove = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -75,9 +89,9 @@ export const remove = async (req: Request, res: Response) => {
       },
     });
     res.status(200).send({
-      message: "Item deletado com sucesso",
+      message: 'Item deletado com sucesso',
     });
   } catch (err) {
-    res.status(500).send({ message: err.message || "Erro ao deletar item" });
+    res.status(500).send({ message: err.message || 'Erro ao deletar item' });
   }
-}
+};

@@ -3,6 +3,7 @@ import Chart from "react-apexcharts";
 import Card from "./components/Card";
 import "apexcharts/dist/apexcharts.css";
 import { FiShoppingBag } from "react-icons/fi";
+
 export default function Home() {
   const chartOptions = {
     chart: {

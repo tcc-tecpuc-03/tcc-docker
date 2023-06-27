@@ -41,6 +41,44 @@ export const get = async (req: Request, res: Response) => {
   }
 };
 
+export const getById = async (req: Request, res: Response) => {
+  try {
+    const baskets = await prisma.basket.findMany({
+      where: {
+        deleted: false,
+        id: Number(req.params.id),
+      },
+      include: {
+        basket_items: {
+          include: {
+            items: true,
+            basket: true,
+          },
+        },
+      },
+    });
+
+    res.status(200).json(
+      baskets.map(({ basket_items, created_at, id, deleted, nome }) => {
+        return {
+          id,
+          nome,
+          created_at,
+          deleted,
+          items: basket_items.map(({ items, basket, id }) => {
+            return {
+              id,
+              item: items,
+            };
+          }),
+        };
+      })
+    );
+  } catch (err) {
+    res.status(500).send({ message: err.message || 'Erro ao buscar itens' });
+  }
+};
+
 export const post = async (req: Request, res: Response) => {
   const { rfid } = req.body as { rfid: string[] };
   const { nome } = req.body as Ibasket;
