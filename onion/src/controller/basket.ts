@@ -80,15 +80,35 @@ export const getById = async (req: Request, res: Response) => {
 };
 
 export const post = async (req: Request, res: Response) => {
-  const { rfid } = req.body as { rfid: string[] };
+  const { rfid, id } = req.body as { rfid: string[]; id?: number };
   const { nome } = req.body as Ibasket;
   try {
-    const basket = await prisma.basket.create({
-      data: {
-        nome: nome || 'Carrinho',
-        created_at: new Date(),
-      },
-    });
+    let basket;
+
+    if (id) {
+      basket = await prisma.basket.findUnique({
+        where: {
+          id: id,
+        },
+      });
+
+      if (!basket) {
+        throw new Error(`Cesta com ID ${id} não encontrada.`);
+      }
+
+      await prisma.basket_items.deleteMany({
+        where: {
+          id_basket: basket.id,
+        },
+      });
+    } else {
+      basket = await prisma.basket.create({
+        data: {
+          nome: nome || 'Carrinho',
+          created_at: new Date(),
+        },
+      });
+    }
 
     const basketItemsPromises = rfid.map(async (itemRfid) => {
       const item = await prisma.items.findFirst({
