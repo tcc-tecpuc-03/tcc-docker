@@ -126,3 +126,4 @@ export const post = async (req: Request, res: Response) => {
     res.status(500).send({ message: err.message || 'Erro ao criar itens' });
   }
 };
+
