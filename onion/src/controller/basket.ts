@@ -80,15 +80,31 @@ export const getById = async (req: Request, res: Response) => {
 };
 
 export const post = async (req: Request, res: Response) => {
-  const { rfid } = req.body as { rfid: string[] };
+  const { rfid, basketId } = req.body as { rfid: string[]; basketId: number };
   const { nome } = req.body as Ibasket;
   try {
-    const basket = await prisma.basket.create({
-      data: {
-        nome: nome || 'Carrinho',
-        created_at: new Date(),
-      },
-    });
+    let basket;
+
+    if (basketId) {
+      basket = await prisma.basket.upsert({
+        where: { id: basketId },
+        update: {
+          nome: nome || 'Carrinho',
+        },
+        create: {
+          nome: nome || 'Carrinho',
+          created_at: new Date(),
+        },
+      });
+    } else {
+      basket = await prisma.basket.create({
+        data: {
+          id: basketId,
+          nome: nome || 'Carrinho',
+          created_at: new Date(),
+        },
+      });
+    }
 
     const basketItemsPromises = rfid.map(async (itemRfid) => {
       const item = await prisma.items.findFirst({
@@ -126,4 +142,3 @@ export const post = async (req: Request, res: Response) => {
     res.status(500).send({ message: err.message || 'Erro ao criar itens' });
   }
 };
-

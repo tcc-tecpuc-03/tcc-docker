@@ -1,37 +1,37 @@
-import { lazy } from 'react';
-import { ListItems } from '../pages/ListItems';
-import CreateItem from '../pages/CreateItem';
-import CartItems from '../pages/CartItems';
-import Login from '../pages/Login';
-import Home from '../pages/Home';
-import { Error } from '../pages/Page404';
+import { lazy } from "react";
+import { ListItems } from "../pages/ListItems";
+import CreateItem from "../pages/CreateItem";
+import CartItems from "../pages/CartItems";
+import Login from "../pages/Login";
+import Home from "../pages/Home";
+import { Error } from "../pages/Page404";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     component: Home,
   },
   {
-    path: '*',
+    path: "*",
     404: true,
     component: Error,
   },
   {
-    path: '/auth',
-    component: Login
+    path: "/auth",
+    component: Login,
   },
   {
-    path: '/cart/:id',
-    component: CartItems
+    path: "/cesta/:id",
+    component: CartItems,
   },
   {
-    path: '/createitem',
-    component: CreateItem
+    path: "/createitem",
+    component: CreateItem,
   },
   {
-    path: '/listitem',
-    component: ListItems
-  }
+    path: "/listitem",
+    component: ListItems,
+  },
 ];
 
 export default routes;
