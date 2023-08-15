@@ -2,57 +2,73 @@ import { Sidebar } from "../../components/Layout/Sidebar";
 import Chart from "react-apexcharts";
 import Card from "./components/Card";
 import "apexcharts/dist/apexcharts.css";
-import { FiShoppingBag } from "react-icons/fi";
+import { LuShoppingCart, LuArchive } from "react-icons/lu";
 
 export default function Home() {
+  const months = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ];
   const chartOptions = {
     chart: {
       id: "bar-chart",
     },
-    xaxis: {
-      categories: [
-        "Categoria 1",
-        "Categoria 2",
-        "Categoria 3",
-        "Categoria 4",
-        "Categoria 5",
-      ],
+    grid: {
+      show: false,
     },
+    yaxis: {
+      // only show subtitle
+      labels: {
+        show: false,
+      },
+    },
+    xaxis: {
+      labels: {
+        show: false,
+      },
+      categories: [...months],
+    },
+    colors: ["#9F67FF", "#7C3AED"],
   };
 
   const chartData = [
     {
-      name: "Série 1",
-      data: [30, 40, 45, 50, 49],
-    },
-    {
-      name: "Série 2",
-      data: [10, 15, 20, 25, 30],
+      name: "Vendas mensais",
+      data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 900)),
     },
   ];
 
   return (
-    <div className="flex">
-      <div className="w-64 bg-gray-200">
-        <Sidebar />
+    <div className="flex flex-col flex-grow p-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Card title="Itens comprados" icon={LuArchive}>
+          <p className="text-3xl font-inter">10</p>
+        </Card>
+        <Card title="Maior venda" icon={LuShoppingCart}>
+          <p className="text-3xl font-inter">R$ 10,00</p>
+        </Card>
+        <Card title="Cestas finalizadas" icon={LuShoppingCart}>
+          <p className="text-3xl font-inter">10</p>
+        </Card>
       </div>
-      <div className="flex flex-col flex-grow p-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card title="Card 1" />
-          <Card title="Card 2" />
-          <Card title="Cestas finalizadas" icon={FiShoppingBag}>
-            <p className="text-3xl font-inter">10</p>
-          </Card>
-        </div>
-        <div className="mt-4">
-          <Chart
-            options={chartOptions}
-            series={chartData}
-            type="bar"
-            height={300}
-            className="w-full"
-          />
-        </div>
+      <div className="mt-4">
+        <h1 className="text-2xl text-black font-inter">Vendas mensais</h1>
+        <Chart
+          options={chartOptions}
+          series={chartData}
+          type="bar"
+          height={300}
+          className="w-full"
+        />
       </div>
     </div>
   );

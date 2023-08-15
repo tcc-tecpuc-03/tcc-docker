@@ -142,3 +142,17 @@ export const post = async (req: Request, res: Response) => {
     res.status(500).send({ message: err.message || 'Erro ao criar itens' });
   }
 };
+
+export const deleteBasket = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const basket = await prisma.basket.update({
+      where: { id: Number(id) },
+      data: { deleted: true },
+    });
+
+    res.status(200).json(basket);
+  } catch (err) {
+    res.status(500).send({ message: err.message || 'Erro ao deletar item' });
+  }
+};

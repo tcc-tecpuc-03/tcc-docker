@@ -45,8 +45,8 @@ export default function CartItems() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 py-2 lg:py-10 p-4">
-      <div className="p-6 bg-white rounded shadow-md w-full sm:w-4/5 md:w-3/5 lg:w-1/3">
+    <div className="flex flex-col items-center justify-center h-full py-2 lg:py-10 p-4">
+      <div className="p-6 rounded bg-gray-100 shadow-md w-full sm:w-4/5 md:w-3/5 lg:w-1/3">
         <h1 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-gray-700 font-titillium">
           Cesta #{id}
         </h1>

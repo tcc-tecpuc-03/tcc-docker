@@ -9,7 +9,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ icon: Icon, title, children }) => {
   return (
-    <div className="bg-white p-4 rounded shadow">
+    <div className="bg-zinc-800 text-white p-4 rounded shadow">
       <div className="flex items-center justify-between mb-4 font-titillium">
         {title && <h3 className="text-lg font-titillium">{title}</h3>}
         {Icon && <Icon size={24} />}
