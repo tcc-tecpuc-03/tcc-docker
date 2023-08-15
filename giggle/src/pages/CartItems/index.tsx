@@ -46,14 +46,40 @@ export default function CartItems() {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex w-full h-full">
         <aside className="fixed inset-y-0 right-0 w-3/12 bg-zinc-800 flex flex-col p-2">
           <div className="flex-grow">
             <h1 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-gray-200 font-titillium">
               Cesta #{id}
             </h1>
           </div>
+
+          <div className="flex w-full h-full ">
+            <div className="overflow-y-auto max-h-[60vh] w-full ">
+              {products.length > 0 ? (
+                <Item data={products} />
+              ) : (
+                <p>Nenhum item na cesta.</p>
+              )}
+            </div>
+          </div>
+
           <div className="mt-auto">
+            <span className="text-lg text-gray-200 font-inter">
+              Total: R${" "}
+              {products
+                .reduce(
+                  (acc: number, curr: CartItem) =>
+                    acc +
+                    curr.items.reduce(
+                      (acc: number, curr: Item) =>
+                        acc + Number(curr?.item?.preco ?? 0),
+                      0
+                    ),
+                  0
+                )
+                .toFixed(2)}
+            </span>
             <Button
               buttonProps={{
                 style: {
