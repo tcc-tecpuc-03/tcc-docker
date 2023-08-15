@@ -45,40 +45,27 @@ export default function CartItems() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full py-2 lg:py-10 p-4">
-      <div className="p-6 rounded bg-gray-100 shadow-md w-full sm:w-4/5 md:w-3/5 lg:w-1/3">
-        <h1 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-gray-700 font-titillium">
-          Cesta #{id}
-        </h1>
-
-        <div className="overflow-y-auto max-h-[60vh]">
-          {products.length > 0 ? (
-            <Item data={products} />
-          ) : (
-            <p>Nenhum item na cesta.</p>
-          )}
-        </div>
-
-        <div className="flex justify-between items-center mt-3">
-          <span className="text-lg text-gray-500 font-inter">
-            Total: R${" "}
-            {products
-              .reduce(
-                (acc: number, curr: CartItem) =>
-                  acc +
-                  curr.items.reduce(
-                    (acc: number, curr: Item) =>
-                      acc + Number(curr?.item?.preco ?? 0),
-                    0
-                  ),
-                0
-              )
-              .toFixed(2)}
-          </span>
-
-          <Button>Finalizar compra</Button>
-        </div>
+    <>
+      <div className="flex">
+        <aside className="fixed inset-y-0 right-0 w-3/12 bg-zinc-800 flex flex-col p-2">
+          <div className="flex-grow">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-gray-200 font-titillium">
+              Cesta #{id}
+            </h1>
+          </div>
+          <div className="mt-auto">
+            <Button
+              buttonProps={{
+                style: {
+                  width: "100%",
+                },
+              }}
+            >
+              Finalizar compra
+            </Button>
+          </div>
+        </aside>
       </div>
-    </div>
+    </>
   );
 }
