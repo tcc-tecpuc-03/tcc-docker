@@ -49,7 +49,3 @@ DATABASE_URL="postgresql://[usuario]:[senha]@localhost:5432/postgres?schema=[sch
 - usuario: postgres
 - senha: postgres
 - schema: basket (caso não seja alterado)
-
-#
-- frontend (Sem .env ainda)
-
